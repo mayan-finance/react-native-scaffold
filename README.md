@@ -45,13 +45,13 @@ Follow the guide to make sure you:
 
 ## Flow
 1. Connect to an evm wallet app
-   - For evm wallets this will open wallet-connect dialog to connect to a wallet app.
+   - For evm wallets this will open WalletConnect modal to connect to a wallet app.
 2. Connect to a Solana wallet app
-    - To connect to a solana wallet app, this app will use Solana mobile adapter.
+    - To connect to a solana wallet app, this mobile dApp uses Solana mobile adapter.
 3. Get a quote
-    - Uses [quote function](https://github.com/mayan-finance/swap-sdk#getting-quote) of mayan swap sdk to get a quote for the swap.
+    - Uses [quote function](https://github.com/mayan-finance/swap-sdk#getting-quote) of mayan swap SDK to get a quote.
 4. Execute the swap
-    - For swaps from Solana to EVM, use [swapFromSolana](https://github.com/mayan-finance/swap-sdk#swap-from-solana) function and pass the `signSolanaTransaction` param like this:
+    - For swaps from Solana to EVM, dApp calls [swapFromSolana](https://github.com/mayan-finance/swap-sdk#swap-from-solana) function and passes the `signSolanaTransaction` param like this:
     ```js
         const mwaSignTransaction = useCallback(
         async (tx: Transaction) => {
@@ -67,6 +67,6 @@ Follow the guide to make sure you:
         [authorizeSession],
       ); 
     ```
-    - For swaps from EVM to Solana, use [swapFromEVM](https://github.com/mayan-finance/swap-sdk#swap-from-evm). For ERC20 tokens make sure user has approved the token transfer before calling this function.
+    - To swap from EVM to Solana, use [swapFromEvm](https://github.com/mayan-finance/swap-sdk#swap-from-evm). For ERC20 tokens make sure user has approved the token transfer before calling this function.
 
 
