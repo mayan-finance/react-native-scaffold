@@ -122,7 +122,7 @@ export default function Swap() {
         <Text>Amount</Text>
         <TextInput
           style={styles.input}
-          placeholder="Timeout in minutes"
+          placeholder="Amount to swap"
           value={amount}
           onChangeText={setAmount}
         />

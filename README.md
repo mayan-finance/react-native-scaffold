@@ -12,13 +12,13 @@ This React Native dApp is only fully functional on Android.
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/solana-mobile/solana-mobile-dapp-scaffold/assets/18451967/3d83d3dc-ab65-4a2c-881d-8a229f34e392" alt="Scaffold dApp Screenshot 1" width=300 />
+      <img src="https://cdn.mayan.finance/sample-rn-1.jpg" alt="Scaffold dApp Screenshot 1" width=300 />
     </td>
     <td align="center">
-      <img src="https://github.com/solana-mobile/solana-mobile-dapp-scaffold/assets/18451967/2fd69bd4-834d-45e1-8c7a-f80b5b576c96" alt="Scaffold dApp Screenshot 3" width=300 />
+      <img src="https://cdn.mayan.finance/sample-rn-2.jpg" alt="Scaffold dApp Screenshot 2" width=300 />
     </td>
     <td align="center">
-      <img src="https://github.com/solana-mobile/solana-mobile-dapp-scaffold/assets/18451967/cdd93c12-d9ff-4739-81af-92da5b90303a" alt="Scaffold dApp Screenshot 2" width=300 />
+      <img src="https://cdn.mayan.finance/sample-rn-3.jpg" alt="Scaffold dApp Screenshot 3" width=300 />
     </td>
   </tr>
 </table>
