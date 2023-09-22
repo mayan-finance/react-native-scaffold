@@ -1,11 +1,13 @@
-# Solana Mobile dApp Scaffold
+# Cross-chain Swap React Native dApp Scaffold
 
-A ready-to-go template Solana React Native dApp with dependencies installed and basic React UI components.
-It provides an interface to connect to locally installed wallet apps (that are MWA-compatible), view your account balance on devnet, and request an airdrop of SOL.
+A ready-to-go template of cross-chain swap dApp with basic React UI components based on [Solana Mobile daApp Scaffold](https://github.com/solana-mobile/solana-mobile-dapp-scaffold).
+It provides an interface to connect to locally installed wallet apps and perform cross-chain swaps between them.
 
 This React Native dApp is only fully functional on Android.
 
 ## Featured Libarires
+- [Mayan Swap SDK](https://github.com/mayan-finance/swap-sdk) for getting quotes and executing swaps
+- [WalletConnect Modal](https://github.com/WalletConnect/modal-react-native) for connecting to EVM wallets
 - [Mobile Wallet Adapter](https://github.com/solana-mobile/mobile-wallet-adapter/tree/main/js/packages/mobile-wallet-adapter-protocol) for connecting to wallets and signing transactions/messages
 - [web3.js](https://solana-labs.github.io/solana-web3.js/) for constructing transactions and an RPC `connection` client.
 
@@ -31,42 +33,40 @@ Follow the guide to make sure you:
 - setup your Android and React Native development environment.
 - have an Android device or emulator.
 - install an MWA compliant wallet app on your device/emulator.
+- install a WalletConnect compliant wallet app on your device/emulator.
    
 ## Usage
-1. Initialize project template
-```
-npx react-native init MySolanaDapp --template @solana-mobile/solana-mobile-dapp-scaffold --npm
-```
+1. Clone the project
+- `git clone https://github.com/mayan-finance/swap-sdk.git`
 2. Install dependencies
 - `yarn install` or `npm install`
 3. Launch the app on your Android device/emulator
 - `npx react-native run-android`
 
-## Troubleshooting
-  
-- `TypeError: cli.init is not a function` 
-  - This during template initialization means you have an old version of React Native CLI.
-This template only works with the new CLI. You can uninstall and reinstall it as directed [here](https://stackoverflow.com/questions/72768245/typeerror-cli-init-is-not-a-function-for-react-native).
+## Flow
+1. Connect to an evm wallet app
+   - For evm wallets this will open WalletConnect modal to connect to a wallet app.
+2. Connect to a Solana wallet app
+    - To connect to a solana wallet app, this mobile dApp uses Solana mobile adapter.
+3. Get a quote
+    - Uses [quote function](https://github.com/mayan-finance/swap-sdk#getting-quote) of mayan swap SDK to get a quote.
+4. Execute the swap
+    - For swaps from Solana to EVM, dApp calls [swapFromSolana](https://github.com/mayan-finance/swap-sdk#swap-from-solana) function and passes the `signSolanaTransaction` param like this:
+    ```js
+        const mwaSignTransaction = useCallback(
+        async (tx: Transaction) => {
+          return await transact(async (wallet: Web3MobileWallet) => {
+            authorizeSession(wallet);
+            const signedTransactions = await wallet.signTransactions({
+              transactions: [tx],
+            });
 
-<br>
-
-- `error Failed to load configuration of your project.`
-  - Same as above, but for `yarn`. [Uninstall and reinstall](https://github.com/react-native-community/cli#updating-the-cli) the CLI through yarn.
-
-<br>
-
-- `Looks like your iOS environment is not properly set`:
-  -  You can ignore this during template initialization and build the Android app as normal. This template is only compatible with Android.
-
-<br>
-
-- `Usage Error: It seems you are trying to add a package using a https:... url; we now require package names to be explicitly specified.`
-  - This error happens on certain versions of `yarn`, and occurs if you try to initialize the template through the Github repo URL, rather than the npm package. To avoid this, use the `@solana-mobile/solana-mobile-dapp-scaffold` package as specified, or downgrade your `yarn` version to classic (1.22.x).
-
-<br>
-
-- `error Couldn't find the ".../@solana-mobile/solana-mobile-dapp-scaffold/template.config.js file inside "@solana-mobile/solana-mobile-dapp-scaffold" template.`
-  - This is a [known error](https://github.com/react-native-community/cli/issues/1924) that occurs with certain versions of `yarn` (>= 3.5.0). It is fixed by running the cli command with the `--npm` flag or downgrading your version of `yarn`.
-
+            return signedTransactions[0];
+          });
+        },
+        [authorizeSession],
+      ); 
+    ```
+    - To swap from EVM to Solana, use [swapFromEvm](https://github.com/mayan-finance/swap-sdk#swap-from-evm). For ERC20 tokens make sure user has approved the token transfer before calling this function.
 
 
