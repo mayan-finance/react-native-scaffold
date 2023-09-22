@@ -37,11 +37,14 @@ Follow the guide to make sure you:
    
 ## Usage
 1. Clone the project
-- `git clone https://github.com/mayan-finance/swap-sdk.git`
+   - `git clone https://github.com/mayan-finance/swap-sdk.git`
 2. Install dependencies
-- `yarn install` or `npm install`
-3. Launch the app on your Android device/emulator
-- `npx react-native run-android`
+   - `yarn install`
+3. Set your WalletConnect project ID
+   - If you don't have a project ID, create one [here](https://docs.walletconnect.com/2.0/web3modal/platforms/react-native)
+   - Set your project ID in [`components/DappWalletConnectModal.tsx`](https://github.com/mayan-finance/react-native-scaffold/blob/95c968f2d5da44179bfa40642e48b0b9aa848a7c/components/DappWalletConnectModal.tsx#L16)
+4. Launch the app on your Android device/emulator
+   - `npx react-native run-android`
 
 ## Flow
 1. Connect to an evm wallet app
@@ -49,7 +52,7 @@ Follow the guide to make sure you:
 2. Connect to a Solana wallet app
     - To connect to a solana wallet app, this mobile dApp uses Solana mobile adapter.
 3. Get a quote
-    - Uses [quote function](https://github.com/mayan-finance/swap-sdk#getting-quote) of mayan swap SDK to get a quote.
+    - Uses [quote function](https://github.com/mayan-finance/swap-sdk#getting-quote) of Mayan swap SDK to get a quote.
 4. Execute the swap
     - For swaps from Solana to EVM, dApp calls [swapFromSolana](https://github.com/mayan-finance/swap-sdk#swap-from-solana) function and passes the `signSolanaTransaction` param like this:
     ```js
