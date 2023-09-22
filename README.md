@@ -12,13 +12,13 @@ This React Native dApp is only fully functional on Android.
 <table>
   <tr>
     <td align="center">
-      <img src="https://cdn.mayan.finance/sample-rn-1.jpg" alt="Scaffold dApp Screenshot 1" width=300 />
+      <img src="https://cdn.mayan.finance/rn_sc_1.jpg" alt="Scaffold dApp Screenshot 1" width=300 />
     </td>
     <td align="center">
-      <img src="https://cdn.mayan.finance/sample-rn-2.jpg" alt="Scaffold dApp Screenshot 2" width=300 />
+      <img src="https://cdn.mayan.finance/rn_sc_2.jpg" alt="Scaffold dApp Screenshot 2" width=300 />
     </td>
     <td align="center">
-      <img src="https://cdn.mayan.finance/sample-rn-3.jpg" alt="Scaffold dApp Screenshot 3" width=300 />
+      <img src="https://cdn.mayan.finance/rn_sc_3.jpg" alt="Scaffold dApp Screenshot 3" width=300 />
     </td>
   </tr>
 </table>

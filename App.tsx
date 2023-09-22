@@ -9,6 +9,7 @@ import {AuthorizationProvider} from './components/providers/AuthorizationProvide
 import {Header} from './components/Header';
 
 import MainScreen from './screens/MainScreen';
+import DappWalletConnectModal from "./components/DappWalletConnectModal";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <MainScreen />
         </SafeAreaView>
       </AuthorizationProvider>
+      <DappWalletConnectModal />
     </ConnectionProvider>
   );
 }

@@ -7,7 +7,7 @@ import {alertAndLog} from '../util/alertAndLog';
 
 type Props = Readonly<ComponentProps<typeof Button>>;
 
-export default function ConnectButton(props: Props) {
+export default function ConnectSolanaButton(props: Props) {
   const {authorizeSession} = useAuthorization();
   const [authorizationInProgress, setAuthorizationInProgress] = useState(false);
   const handleConnectPress = useCallback(async () => {

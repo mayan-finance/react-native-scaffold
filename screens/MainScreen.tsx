@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {Section} from '../components/Section';
-import ConnectButton from '../components/ConnectButton';
+import ConnectSolanaButton from '../components/ConnectSolanaButton';
 import AccountInfo from '../components/AccountInfo';
 import {
   useAuthorization,
@@ -10,45 +10,41 @@ import {
 } from '../components/providers/AuthorizationProvider';
 import {useConnection} from '../components/providers/ConnectionProvider';
 import Swap from '../components/Swap';
+import {useWalletConnectModal} from '@walletconnect/modal-react-native';
+import ConnectEthereumButton from "../components/ConnectEthereumButton";
 
 export default function MainScreen() {
   const {connection} = useConnection();
-  const {selectedAccount} = useAuthorization();
-  const [balance, setBalance] = useState<number | null>(null);
-
-  const fetchAndUpdateBalance = useCallback(
-    async (account: Account) => {
-      console.log('Fetching balance for: ' + account.publicKey);
-      const fetchedBalance = await connection.getBalance(account.publicKey);
-      console.log('Balance fetched: ' + fetchedBalance);
-      setBalance(fetchedBalance);
-    },
-    [connection],
-  );
-
-  useEffect(() => {
-    if (!selectedAccount) {
-      return;
-    }
-    fetchAndUpdateBalance(selectedAccount);
-  }, [fetchAndUpdateBalance, selectedAccount]);
+  const {selectedAccount: solanaAccount} = useAuthorization();
+  const {address: etheruemAddress} = useWalletConnectModal();
 
   return (
     <>
       <View style={styles.mainContainer}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {selectedAccount ? (
-            <AccountInfo
-              selectedAccount={selectedAccount}
-              balance={balance}
-              fetchAndUpdateBalance={fetchAndUpdateBalance}
-            />
+          {solanaAccount ? (
+            <View>
+              <Text numberOfLines={1} ellipsizeMode="tail">
+                Solana address: {solanaAccount.publicKey.toBase58()}
+              </Text>
+            </View>
           ) : (
-            <ConnectButton title="Connect wallet" />
+            <ConnectSolanaButton title="Connect Solana Wallet" />
           )}
-          {selectedAccount ? (
+          <View style={{ height: 16 }} />
+          {etheruemAddress ? (
+            <View>
+              <Text numberOfLines={1} ellipsizeMode="tail">
+                Ethereum address: {etheruemAddress}
+              </Text>
+            </View>
+          ) : (
+            <ConnectEthereumButton title="Connect Ethereum Wallet" />
+          )}
+          <View style={{ height: 16 }} />
+          {!!(solanaAccount && etheruemAddress) ? (
             <>
-              <Text style={{ fontSize: 20 }}>Swap from Solana to Avalanche</Text>
+              <Text style={{fontSize: 20}}>Swap between Solana and Ethereum</Text>
               <View style={styles.divider} />
               <Swap />
             </>
